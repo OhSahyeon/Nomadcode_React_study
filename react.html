@@ -11,11 +11,14 @@
   </div>
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js "></script>
+  <script type = "text/babel">
     const root = document.getElementById("root")
     const h3 = React.createElement("h3", null, "안녕?")
-    const btn = React.createElement("button", {onClick: () => console.log("Hello!"), onMouseEnter: () => console.log("Oh!")}, "click me!")
-    const container = React.createElement("div", null, [h3, btn])
+    function Button() {
+      return <button onClick= {()=> console.log("yeah Hello!")}>click me!</button>
+    }
+    const container = React.createElement("div", null, [h3, <Button/>])
     ReactDOM.render(container, root)
   </script>
 </body>
