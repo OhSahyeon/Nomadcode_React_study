@@ -21,9 +21,11 @@
       render()
     }
     function render() {
-      ReactDOM.render(<Button/>, root)
+      ReactDOM.render(<App/>, root)
     }
-    function Button() {
+    function App() {
+      const [A, B] = React.useState(0);
+
       return (
         <div>
           <h1>Total clicks: {counter}</h1>
