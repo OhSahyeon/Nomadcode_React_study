@@ -15,16 +15,23 @@
   <script type = "text/babel">
     const root = document.getElementById("root")
     const h3 = React.createElement("h3", null, "안녕?")
+    let counter = 0;
+    function counterUp() {
+      counter = counter + 1
+      render()
+    }
+    function render() {
+      ReactDOM.render(<Button/>, root)
+    }
     function Button() {
       return (
         <div>
-          <span>Simple test_1</span>
-          <button onClick= {()=> console.log("yeah Hello!")}>click me!</button>
+          <h1>Total clicks: {counter}</h1>
+          <button onClick={counterUp}>click me!</button>
         </div>
       );
     };
-    const container = React.createElement( Button )
-    ReactDOM.render(container, root)
+    render()
   </script>
 </body>
 </html>
