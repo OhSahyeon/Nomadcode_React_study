@@ -15,25 +15,21 @@
   <script type = "text/babel">
     const root = document.getElementById("root")
     const h3 = React.createElement("h3", null, "안녕?")
-    let counter = 0;
-    function counterUp() {
-      counter = counter + 1
-      render()
-    }
-    function render() {
-      ReactDOM.render(<App/>, root)
-    }
     function App() {
       const [A, B] = React.useState(0);
-
+      
+      function counterUp() {
+        B(A + 1);
+      };
+      
       return (
         <div>
-          <h1>Total clicks: {counter}</h1>
+          <h1>Total clicks: {A}</h1>
           <button onClick={counterUp}>click me!</button>
         </div>
       );
     };
-    render()
+    ReactDOM.render(<App/>, root)
   </script>
 </body>
 </html>
