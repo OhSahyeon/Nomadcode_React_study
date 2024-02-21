@@ -15,21 +15,30 @@
   <script type = "text/babel">
     const h3 = React.createElement("h3", null, "안녕?")
     function App() {
-      const [minutes, setMinutes] = React.useState(0);
+      const [minutes, setMinutes] = React.useState("");
       
       function onChange(e){
           console.log(e.target.value)
           setMinutes(e.target.value)
       }
 
+      function reset() {
+        setMinutes("")
+      }
+
       return (
         <div>
-          <h1>{minutes}</h1>
           <h1>Super Converter</h1>
-          <label htmlFor="Hours">Hours</label>
-          <input id="Hours" placeholder="Hours" type="number" value={minutes} onChange ={onChange}/>
-          <label htmlFor="Minutes">Minutes</label>
-          <input id="Minutes" placeholder="Minutes" type="number"/>
+          <h3>Clock {minutes}</h3>
+          <div>
+            <label htmlFor="Hours">Hours</label>
+            <input id="Hours" placeholder="Hours" type="number" value={minutes / 60}/>
+          </div>
+          <div>
+            <label htmlFor="Minutes">Minutes</label>
+            <input id="Minutes" placeholder="Minutes" type="number" value={minutes} onChange ={onChange}/>
+          </div>
+          <button onClick={reset}>Reset</button>
         </div>
       );
     };
