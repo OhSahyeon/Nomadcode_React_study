@@ -13,22 +13,27 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js "></script>
   <script type = "text/babel">
-    const root = document.getElementById("root")
     const h3 = React.createElement("h3", null, "안녕?")
     function App() {
-      const [A, B] = React.useState(0);
+      const [minutes, setMinutes] = React.useState(0);
       
-      function counterUp() {
-        B(A + 1);
-      };
-      
+      function onChange(e){
+          console.log(e.target.value)
+          setMinutes(e.target.value)
+      }
+
       return (
         <div>
-          <h1>Total clicks: {A}</h1>
-          <button onClick={counterUp}>click me!</button>
+          <h1>{minutes}</h1>
+          <h1>Super Converter</h1>
+          <label htmlFor="Hours">Hours</label>
+          <input id="Hours" placeholder="Hours" type="number" value={minutes} onChange ={onChange}/>
+          <label htmlFor="Minutes">Minutes</label>
+          <input id="Minutes" placeholder="Minutes" type="number"/>
         </div>
       );
     };
+    const root = document.getElementById("root")
     ReactDOM.render(<App/>, root)
   </script>
 </body>
