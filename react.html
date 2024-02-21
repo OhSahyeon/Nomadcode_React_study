@@ -13,9 +13,14 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js "></script>
   <script type = "text/babel">
-    const h3 = React.createElement("h3", null, "안녕?")
-    function App() {
-      const [minutes, setMinutes] = React.useState("");
+    function MinToHours() {
+      const [minutes, setMinutes] = React.useState(0);
+      const [flip, setFlip] = React.useState(true);
+
+      const onFlip = () => {
+        setFlip((current)=> !current)
+        reset()
+      } 
       
       function onChange(e){
           console.log(e.target.value)
@@ -23,25 +28,82 @@
       }
 
       function reset() {
-        setMinutes("")
+        setMinutes(0)
       }
 
       return (
         <div>
-          <h1>Super Converter</h1>
-          <h3>Clock {minutes}</h3>
           <div>
             <label htmlFor="Hours">Hours</label>
-            <input id="Hours" placeholder="Hours" type="number" value={minutes / 60}/>
+            <input id="Hours" disabled = {flip} placeholder="Hours" type="number" value={flip ? minutes / 60 : minutes} onChange ={onChange}/>
           </div>
           <div>
             <label htmlFor="Minutes">Minutes</label>
-            <input id="Minutes" placeholder="Minutes" type="number" value={minutes} onChange ={onChange}/>
+            <input id="Minutes" disabled = {!flip} placeholder="Minutes" type="number" value={flip ? minutes : minutes * 60} onChange ={onChange}/>
           </div>
           <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{flip ? "Minutes => Hours" : "Minutes <= Hour"}</button>
         </div>
       );
     };
+    
+    function KmToMil() {
+      const [minutes, setMinutes] = React.useState(0);
+      const [flip, setFlip] = React.useState(true);
+
+      const onFlip = () => {
+        setFlip((current)=> !current)
+        reset()
+      } 
+      
+      function onChange(e){
+          console.log(e.target.value)
+          setMinutes(e.target.value)
+      }
+
+      function reset() {
+        setMinutes(0)
+      }
+
+      return (
+        <div>
+          <div>
+            <label htmlFor="Hours">Km</label>
+            <input id="Hours" disabled = {flip} placeholder="Hours" type="number" value={flip ? minutes * 1.609 : minutes} onChange ={onChange}/>
+          </div>
+          <div>
+            <label htmlFor="Minutes">Miles</label>
+            <input id="Minutes" disabled = {!flip} placeholder="Minutes" type="number" value={flip ? minutes : minutes / 1.609} onChange ={onChange}/>
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{flip ? "Miles => Km" : "Miles <= Km"}</button>
+        </div>
+      );
+    };
+    
+    function App() {
+      const [index, setIndex] = React.useState("X")
+      function onSelect(e){
+        console.log(e.target.value)
+        setIndex(e.target.value)
+        console.log(index)
+      }
+      return (
+        <div>
+          <h2>Converter</h2>
+          <select value={index} onChange={onSelect}>
+            <option value="X">select</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">Km & Miles</option>
+          </select>
+          <hr/>
+          {index === "X" ? "select Units" : null}
+          {index === "0" ? <MinToHours/> : null}
+          {index === "1" ? <KmToMil/> : null}
+        </div>  
+      );
+    };
+
     const root = document.getElementById("root")
     ReactDOM.render(<App/>, root)
   </script>
