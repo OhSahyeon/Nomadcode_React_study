@@ -12,9 +12,10 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js "></script>
     <script type="text/babel">
       function Btn(props) {
-        console.log(props);
+        console.log(props.text, "짜잔@!");
         return (
           <button
+            onClick={props.onClick}
             style={{
               padding: "5px 15px",
               backgroundColor: "Blue",
@@ -26,11 +27,16 @@
           </button>
         );
       }
+      // 리렌더 막아주는 착한친구
+      const MemoBtn = React.memo(Btn);
+
       function App() {
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
         return (
           <div>
-            <Btn text="Save" me="sad" />
-            <Btn text="Continue" you="happy" />
+            <MemoBtn text={value} onClick={changeValue} />
+            <MemoBtn text="Continue" />
           </div>
         );
       }
